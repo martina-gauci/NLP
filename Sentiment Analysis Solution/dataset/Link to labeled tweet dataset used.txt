@@ -1,0 +1,6 @@
+Due to size restrictions, we could not upload the original unprocessed dataset.
+We called this twitterTweetsPosNegRandomized.csv . You can download the dataset
+from this link: https://www.kaggle.com/kazanova/sentiment140 , however the csv
+file will have a different name and more records. When we downloaded it, the 
+first thing we did was to rename it and remove some rows of data. If you would
+like this twitterTweetsPosNegRandomized.csv dataset, kindly contact us.
