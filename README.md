@@ -1,6 +1,6 @@
 # NLP
 This repository holds work I have done in NLP and Machine Learning.  
-This project was carried out with another 3 students.  My contibution to this project was focues at the backend processing of the Enron dataset, frontend styling for the text forensics solution, display of visualisations, the script used for sentiment analysis and the integration of the Twitter Streaming API in Python.
+This project was carried out with another 3 students.  My contribution to this project was focued at the backend processing of the Enron dataset, frontend styling for the text forensics solution, display of visualisations, the script used for sentiment analysis and the integration of the Twitter Streaming API in Python.
 The technologies I came across in this project include JavaScript, jQuery, Python, Plotly, PostgreSQL and Resful APIs among many others.
 
 ## Project Description
