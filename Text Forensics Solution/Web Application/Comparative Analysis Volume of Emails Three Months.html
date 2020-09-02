@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Text Forensics - Comparison of Volume of Emails Over Three Years</title>
+    <link rel="stylesheet" href="assets/css/stylesheet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <script>
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var year1 = url.searchParams.get("year1");
+        var month1 = url.searchParams.get("month1");
+        var year2 = url.searchParams.get("year2");
+        var month2 = url.searchParams.get("month2");
+        var year3 = url.searchParams.get("year3");
+        var month3 = url.searchParams.get("month3");
+        var terms = url.searchParams.get("words");
+        var data = 'http://127.0.0.1:5000/ThreeMonthVolumeOfEmailsSentWithParticularTermsComparativeAnalysis?year1=' + year1 + '&month1=' + month1 + '&year2=' + year2 + '&month2=' + month2 + '&year3=' + year3 + '&month3=' + month3 + '&wordList=' + terms;
+
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", data, false);
+        xmlHttp.onload = function () {
+            var res = JSON.parse(xmlHttp.responseText);
+            if (res[0].ErrorMessage == 'None') {
+                document.write("<h1 class='menu-header'>Comparison of Volume of Emails Over Three Months</h1>")
+                document.write("<h2 class='viz-header'>Only emails containing the following words were considered: "+ res[0].WordsInput +"</h2>\n<div id=mydiv></div>")
+                var data = [
+                    {
+                        x: res[0].DaysInMonthXAxis,
+                        y: res[0].VolumeOfEmailsSentInMonth1YAxis,
+                        mode: 'lines+markers',
+                        name: res[0].Month1 + ' ' + res[0].Year1,
+                        type: 'scatter'
+                    },
+                    {
+                        x: res[0].DaysInMonthXAxis,
+                        y: res[0].VolumeOfEmailsSentInMonth2YAxis,
+                        mode: 'lines+markers',
+                        name: res[0].Month2 + ' ' + res[0].Year2,
+                        type: 'scatter'
+                    },
+                    {
+                        x: res[0].DaysInMonthXAxis,
+                        y: res[0].VolumeOfEmailsSentInMonth3YAxis,
+                        mode: 'lines+markers',
+                        name: res[0].Month3 + ' ' + res[0].Year3,
+                        type: 'scatter'
+                    }
+                ];
+                var layout = {
+                    autosize: true,
+                    xaxis: {
+                        title: 'Days',
+                        autorange: true,
+                        showgrid: true,
+                        zeroline: true,
+                        showline: true,
+                        automargin: true,
+                        fixedrange: true,
+                        showticklabels: true,
+                    },
+                    yaxis: {
+                        title: 'Volume of Emails Sent',
+                        autorange: true,
+                        showgrid: true,
+                        showline: false,
+                        automargin: true,
+                        fixedrange: true,
+                        showticklabels: true,
+                    }
+                };
+                Plotly.newPlot('mydiv', data, layout);
+            } else {
+                document.write('<h1 class="menu-header">' + res[0].ErrorMessage + '</h1>');
+            }
+        }
+        xmlHttp.send(null);
+
+
+
+    </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</body>
+
+</html>

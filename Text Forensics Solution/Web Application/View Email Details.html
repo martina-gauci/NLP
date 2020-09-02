@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Text Forensics - Email Details</title>
+    <link rel="stylesheet" href="assets/css/stylesheet.css">
+</head>
+
+<body class="menu-body">
+    <script>
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var emailId = url.searchParams.get("id");
+        var data = 'http://127.0.0.1:5000/GetFullEmailDetailsByEmailID?emailID=' + emailId;
+
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", data, false);
+        xmlHttp.onload = function () {
+            var res = JSON.parse(xmlHttp.responseText);
+            if (res[0].ErrorMessage == 'None') {
+                document.write('<h1 class="menu-header">Email Details</h1>');
+                document.write('<div class="btn-container">');
+
+                document.write('<span class="email-item">Email ID</span>');
+                document.write('<br><input class="email-info" type="text" readonly="" name="emailId" value="' + res[0].EmailDetails.emailID + '">');
+                
+                document.write('<br><span class="email-item">Date</span>');
+                document.write('<br><input class="email-info" type="text" readonly="" name="date" value="' + res[0].EmailDetails.date + '">');
+
+                document.write('<br><span class="email-item">Subject</span>');
+                document.write('<br><input class="email-info" type="text" readonly="" name="subject" value="' + res[0].EmailDetails.subject + '">');
+
+                document.write('<br><span class="email-item">Sender</span>');
+                document.write('<br><input class="email-info" type="text" readonly="" name="sender" value="' + res[0].EmailDetails.sender + '">');
+
+                document.write('<br><span class="email-item">Receiver/s</span>');
+                document.write('<br><textarea rows="2" class="email-info lrg" readonly="" name="receivers" >' + res[0].EmailDetails.receivers + '</textarea>');
+
+                document.write('<br><span class="email-item">Number of Words</span>');
+                document.write('<br><input class="email-info" type="text" readonly="" name="numberOfWords" value="' + res[0].EmailDetails.numberOfWords + '">');
+
+                document.write('<br><span class="email-item">Directory at Source</span>');
+                document.write('<br><input class="email-info" type="text" readonly="" name="directory" value="' + res[0].EmailDetails.directoryAtSource + '">');
+
+                document.write('<br><span class="email-item">Email Text</span>');
+                document.write('<br><textarea rows="10" class="email-info lrg" readonly="" name="text">' + res[0].EmailDetails.emailtext + '</textarea>');
+
+                
+                document.write('</div>');
+                document.write('</body>')
+        } else {
+                document.write('<h1 class="menu-header">' + res[0].ErrorMessage + '</h1>');
+            }
+        }
+        xmlHttp.send(null);
+    </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

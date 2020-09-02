@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Text Forensics - Most Popular Years Words Were Mentioned</title>
+    <link rel="stylesheet" href="assets/css/stylesheet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <script>
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var terms = url.searchParams.get("words");
+        var data = 'http://127.0.0.1:5000/MostPopularYearsWordsWereMentioned?wordList=' + terms;
+
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", data, false);
+        xmlHttp.onload = function () {
+            var res = JSON.parse(xmlHttp.responseText);
+            if (res[0].ErrorMessage == 'None') {
+                document.write("<h1 class='menu-header'>Most Popular Years Words Were Mentioned</h1>\n<div id=mydiv></div>");
+                var data = [{
+                    type: 'heatmap',
+                    x: res[0].YearsXAxis,
+                    y: res[0].WordsYAxis,
+                    z: res[0].FrequenciesZAxis,
+                    xgap: 7,
+                    ygap: 5,
+                    colorscale: 'Reds'
+                }];
+                var layout = {
+                    autosize: true,
+                    xaxis: {
+                        title: 'Years',
+                        autorange: true,
+                        showgrid: true,
+                        zeroline: true,
+                        showline: true,
+                        automargin: true,
+                        showticklabels: true,
+                        tickangle: 45,
+                        showgrid: false
+                    },
+                    yaxis: {
+                        title: 'Words',
+                        autorange: true,
+                        showgrid: true,
+                        zeroline: true,
+                        showline: false,
+                        automargin: true,
+                        showticklabels: true,
+                        showgrid: false
+                    }
+                };
+                Plotly.newPlot('mydiv', data, layout);
+            } else {
+                document.write('<h1 class="menu-header">' + res[0].ErrorMessage + '</h1>');
+            }
+        }
+        xmlHttp.send(null);
+
+
+
+    </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</body>
+
+</html>

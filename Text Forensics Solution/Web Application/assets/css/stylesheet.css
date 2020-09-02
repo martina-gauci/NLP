@@ -1,0 +1,234 @@
+html{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.menu-body{
+    background-image: url("../images/backgroundStars.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.menu-header{
+    color: #ffffff;
+    background-color: rgb(0,0,0, 0.7);
+    text-align: center;
+    padding: 1.5%;
+}
+
+.form-header{
+    color: #ffffff;
+    background-color: rgb(0,0,0, 0.5);
+    padding: 0.5%;
+    margin-left: 25%;
+    margin-right: 25%;
+
+}
+
+.viz-header{
+    color: #ffffff;
+    background-color: rgb(0,0,0, 0.5);
+    padding: 0.5%;
+    font-size: 20px;
+    
+    text-align: center;
+    padding: 1.5%;
+}
+
+/* styling for all buttons */
+.menu-btn{
+    background-color: rgb(0,0,0, 0.5);
+    border: 3px solid #ffffff;
+    color: #ffffff;
+    padding: 2% 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    width: 60%;
+    margin: 5%;
+}
+
+.menu-btn:hover{
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* additional styling for groups of 3/4 buttons */
+.four{
+    margin: 1%;
+}
+
+/* additional styling for groups of more than 4 buttons */
+.many{
+    margin: 1%;
+    width: 40%;
+}
+
+.btn-container{
+    text-align: center;
+}
+
+.form-btn{
+    background-color: rgb(0,0,0, 0.5);
+    border: 3px solid #ffffff;
+    color: #ffffff;
+    padding: 1.5% 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    width: 15%;
+    margin: 1% 0;
+}
+
+.form-btn:hover{
+    background-color:rgba(255, 255, 255, 0.4);
+}
+
+.form-container{
+    text-align: center;
+}
+
+.form-text{
+    color: #ffffff;
+    font-size: 20px;
+    text-align: left;
+    padding: 0 2%;
+}
+
+.form-input{
+    margin: 2% 0;
+    padding: 1%;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 20px;
+    border: none;
+}
+
+.num{
+    width: 10%;
+}
+
+.list{
+    width: 50%;
+}
+
+/* show border when field is still empty of has invalid content */
+input:invalid{
+    border: 2px solid #959cd7;
+}
+
+table{
+    width: 100%;
+    padding: 2%;
+    table-layout: fixed;
+}
+
+th{
+    background-color: rgb(0,0,0, 0.7);
+    color: #ffffff;
+    text-align: left;
+    padding: 0.5% 1%;
+}
+
+td{
+    padding: 0.5% 1%;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+tr{
+    background-color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(149,156,215);
+}
+
+tr:nth-child(even) .view-btn{
+    border: 3px solid white;
+}
+
+.no-padding{
+    padding: 0px;
+}
+
+.view-btn{
+    background-color: #7f7f7f;
+    border: 3px solid rgb(149,156,215, 0.5);
+    color: #ffffff;
+    padding: 2% 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5%;
+    width: 85%;
+}
+
+.view-btn:hover{
+    background-color: #424242;
+}
+
+/* the following lines remove updown arrows from input fields of type number*/
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.email-item{
+    color: #ffffff;
+    font-size: 20px;
+    text-align: left;
+    padding: 0 2%;
+}
+
+.email-info{
+    margin: 2% 0;
+    padding: 1%;
+    font-size: 20px;
+    border: none;
+    min-width: 20%;
+    max-width: 100%;
+    text-align: center;
+    width: 30%;
+}
+
+.lrg{
+    width: 70%;
+}
+
+.jqcloud{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#mydiv{
+    border: 1px solid #959cd7;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  

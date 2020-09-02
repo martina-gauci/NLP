@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Text Forensics - View Emails By Date and Sender</title>
+    <link rel="stylesheet" href="assets/css/stylesheet.css">
+</head>
+
+<body class="menu-body">
+    <script>
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var year1 = url.searchParams.get("year1");
+        var month1 = url.searchParams.get("month1");
+        var day1 = url.searchParams.get("day1");
+        var year2 = url.searchParams.get("year2");
+        var month2 = url.searchParams.get("month2");
+        var day2 = url.searchParams.get("day2");
+        var email = url.searchParams.get("email");
+        var data = 'http://127.0.0.1:5000/GetEmailDataFilterBySender?startYear='+year1+'&startMonth='+month1+'&startDay='+day1+'&endYear='+year2+'&endMonth='+month2+'&endDay='+day2+'&senderEmail='+email;
+
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", data, false);
+        xmlHttp.onload = function () {
+            var res = JSON.parse(xmlHttp.responseText);
+            if (res[0].ErrorMessage == 'None') {
+                document.write('<h1 class="menu-header">View Emails by Date and Sender</h1>');
+                document.write('<table>');
+                    document.write('<thead>');
+                        document.write('<tr>');
+                            document.write('<th>Email ID</th>');
+                            document.write('<th>Date</th>');
+                            document.write('<th>Subject</th>');
+                            document.write('<th>Sender</th>');
+                            document.write('<th>Receiver/s</th>');
+                            document.write('<th>Details</th>');
+                        document.write('</tr>');
+                    document.write('</thead>');
+                    document.write('<tbody>');
+
+                function displayTableContents (elem){
+                    document.write('<tr>');
+                        document.write('<td>' + elem.emailID + '</td>');
+                        document.write('<td>' + elem.date + '</td>');
+                        document.write('<td>' + elem.subject + '</td>');
+                        document.write('<td>' + elem.sender + '</td>');
+                        document.write('<td>' + elem.receivers + '</td>');
+                        document.write('<td class="no-padding"><a class="view-btn" href="View%20Email%20Details.html?id='+elem.emailID+'">View</a></td>');
+                    document.write('</tr>');
+                }
+
+                res[0].EmailData.forEach(displayTableContents);
+
+                    document.write('</tbody>');
+                    document.write('</table>');
+            } else{
+               document.write('<h1 class="menu-header">' + res[0].ErrorMessage + "</h1>");
+            }
+        }
+        xmlHttp.send(null);
+    </script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

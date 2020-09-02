@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/stylesheet.css">
+    <title>Text Forensics - Words vs Date Form</title>
+</head>
+
+<body class="menu-body">
+    <h1 class="menu-header">Comparison of Volume of Emails Over Three Months</h1>
+    <form class="form-container" action='Comparative Analysis Volume of Emails Three Months.html' target='_blank'>
+        <span class="form-text">Words</span>
+        <input class="form-input list" placeholder="e.g. ['Enron', 'company']" type="text" name="words" pattern="\[('[a-z]+', )*('[a-z]+')+\]" required>
+        <br>
+        <span class="form-text">Year 1</span>
+        <input class="form-input num" placeholder="YYYY" type="number" name="year1" min="1900" max="2019" required>
+        <span class="form-text">Month 1</span>
+        <input class="form-input num" placeholder="MM" type="number"name="month1" min="1" max="12" required>
+        <br>
+        <span class="form-text">Year 2</span>
+        <input class="form-input num" placeholder="YYYY" type="number" name="year2" min="1900" max="2019" required>
+        <span class="form-text">Month 2</span>
+        <input class="form-input num" placeholder="MM" type="number"name="month2" min="1" max="12" required>
+        <br>
+        <span class="form-text">Year 3</span>
+        <input class="form-input num" placeholder="YYYY" type="number" name="year3" min="1900" max="2019" required>
+        <span class="form-text">Month 3</span>
+        <input class="form-input num" placeholder="MM" type="number"name="month3" min="1" max="12" required>
+        <br>
+        <button class="form-btn" type="submit">Submit</button>
+    </form>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</body>
+
+</html>

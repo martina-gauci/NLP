@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GAPT Final Product no tabs</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <h1>Three Term Frequency Comparative Analysis Over Single Year</h1>
+    <div id=mydiv></div>
+    <script>
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var year = url.searchParams.get("year");
+        var terms = url.searchParams.get("words");
+        var data = 'http://127.0.0.1:5000/ThreeTermFrequencyComparativeAnalysisOverSingleYear?year='+year +'&threeWordsList='+terms;
+
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", data, false);
+        xmlHttp.onload = function () {
+            var res = JSON.parse(xmlHttp.responseText);
+            var data = [
+                {
+                    x: res[0].MonthsXAxis,
+                    y: res[0].FrequencyOFWord1YAxis,
+                    mode: 'lines+markers',
+                    name: res[0].WordsInput[0],
+                    type: 'scatter'
+                },
+                {
+                    x: res[0].MonthsXAxis,
+                    y: res[0].FrequencyOFWord2YAxis,
+                    mode: 'lines+markers',
+                    name: res[0].WordsInput[1],
+                    type: 'scatter'
+                },
+                {
+                    x: res[0].MonthsXAxis,
+                    y: res[0].FrequencyOFWord3YAxis,
+                    mode: 'lines+markers',
+                    name: res[0].WordsInput[2],
+                    type: 'scatter'
+                }
+            ];
+            var layout = [{
+                autosize: true,
+                xaxis: {
+                    title: 'MONTHS IN THE YEAR '+ res[0].YearInput,
+                    autorange: true,
+                    showgrid: true,
+                    zeroline: true,
+                    showline: true,
+                    automargin: true,
+                    fixedrange: true,
+                    showticklabels: true,
+                    tickangle: 45
+                },
+                yaxis: {
+                    title: 'FREQUENCY OF TERMS',
+                    autorange: true,
+                    showgrid: true,
+                    showline: false,
+                    automargin: true,
+                    fixedrange: true,
+                    showticklabels: true,
+                }
+            }];
+            Plotly.newPlot('mydiv', data, layout);
+        }
+        xmlHttp.send(null);
+
+
+
+    </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</body>
+
+</html>

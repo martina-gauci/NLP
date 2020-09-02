@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Text Forensics - Basic Word Cloud</title>
+    <link rel="stylesheet" href="assets/css/stylesheet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+    <script src="assets/jqcloud/jqcloud-1.0.4.js"></script>
+    <script src="assets/jqcloud/jqcloud-1.0.4.min.js"></script>
+    <link rel="stylesheet" href="assets/jqcloud/jqcloud.css">
+</head>
+
+<body>
+    <h1 class='menu-header'>Most Frequent Words Sent in the Time Period</h1>
+    <div class='jqcloud'></div>
+    <div id=wordcloud></div>
+    <script>
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var year1 = url.searchParams.get("year1");
+        var month1 = url.searchParams.get("month1");
+        var day1 = url.searchParams.get("day1");
+        var year2 = url.searchParams.get("year2");
+        var month2 = url.searchParams.get("month2");
+        var day2 = url.searchParams.get("day2");
+        var data = 'http://127.0.0.1:5000/WordCloudMostCommonTermsWithinPeriodOfTime?startYear=' + year1 + '&startMonth=' + month1 + '&startDay=' + day1 + '&endYear=' + year2 + '&endMonth=' + month2 + '&endDay=' + day2;
+
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", data, false);
+        xmlHttp.onload = function () {
+            var res = JSON.parse(xmlHttp.responseText);
+            if (res[0].ErrorMessage == 'None') {
+                var words = [];
+                for (var i = 0; i < res[0].Terms.length; i++) {
+                    words.push({ text: '' + res[0].Terms[i], weight: res[0].Frequencies[i] });
+                }
+                $("#wordcloud").jQCloud(words, { width: 1000, height: 440 });
+            } else {
+                document.write('<h1 class="menu-header">' + res[0].ErrorMessage + '</h1>');
+            }
+        }
+        xmlHttp.send(null);
+    </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</body>
+
+</html>

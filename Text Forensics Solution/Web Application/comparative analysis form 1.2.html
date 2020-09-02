@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/stylesheet.css">
+    <title>Text Forensics - Words vs Date Form</title>
+</head>
+
+<body class="menu-body">
+    <h1 class="menu-header">Comparison of Term Usage Over a Month</h1>
+    <form class="form-container" action='Comparative Analysis Three Term Frequency Month.html' target='_blank'>
+        <span class="form-text">Word 1</span>
+        <input class="form-input list" placeholder="e.g. money" type="text" name="word1" pattern="[a-z]+" required>
+        <br>
+        <span class="form-text">Word 2</span>
+        <input class="form-input list" placeholder="e.g. business" type="text" name="word2" pattern="[a-z]+" required>
+        <br>
+        <span class="form-text">Word 3</span>
+        <input class="form-input list" placeholder="e.g. crisis" type="text" name="word3" pattern="[a-z]+" required>
+        <br>
+        <span class="form-text">Year</span>
+        <input class="form-input num" placeholder="YYYY" type="number" name="year" min="1900" max="2019" required>
+        <span class="form-text">Month</span>
+        <input class="form-input num" placeholder="MM" type="number" name="month" min="1" max="12" required>
+        <br>
+        <button class="form-btn" type="submit">Submit</button>
+    </form>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</body>
+
+</html>

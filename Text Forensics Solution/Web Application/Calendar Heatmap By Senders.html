@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Text Forensics - Calendar Heatmaps for Emails Sent by Particular People</title>
+    <link rel="stylesheet" href="assets/css/stylesheet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <script>
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var year = url.searchParams.get("year");
+        var senderList = url.searchParams.get("email");
+        var data = 'http://127.0.0.1:5000/CalendarHeatmapForYearWithParticularSenders?year=' + year + '&senderList=' + senderList;
+
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", data, false);
+        xmlHttp.onload = function () {
+            var res = JSON.parse(xmlHttp.responseText);
+            if (res[0].ErrorMessage == 'None') {
+                document.write("<h1 class='menu-header'>Calendar Heatmaps for Emails Sent by Particular People for " + res[0].YearInput+"</h1>");
+                document.write("<h2 class='viz-header'>Only Emails Sent by " + res[0].SendersInput+" are considered</h2>\n<div id=mydiv></div>");
+                var data = [{ 
+                    z: res[0].VolumeOfEmailsSentInYearZAxis,
+                    y: res[0].DaysOfWeekYAxis,
+                    x: res[0].MonthsInYearXAxis,
+                    hoverinfo: 'text',
+                    text: res[0].HoverText,
+                    xgap: 5,
+                    ygap: 5,
+                    colorscale: 'Reds',
+                    type: 'heatmap'
+                }];
+                var layout = {
+                    autosize: true,
+                    xaxis: {
+                        "ticklen": 0,
+                        "tickmode": "array",
+                        "ticktext": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                        "tickvals": [2, 6, 11, 15, 19, 24, 28, 32, 37, 41, 45, 50],
+                        "title": "Months",
+                        "autorange": true,
+                        "automargin": true,
+                        "showticklabels": true,
+                        "showgrid": false
+                    },
+                    yaxis: {
+                        "tickmode": "array",
+                        "ticktext": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                        "tickvals": [1, 2, 3, 4, 5, 6, 7],
+                        "title": "Days of the Week",
+                        "autorange": true,
+                        "automargin": true,
+                        "showticklabels": true,
+                        "showgrid": false
+                    }
+                };
+                Plotly.newPlot('mydiv', data, layout);
+            } else {
+                document.write('<h1 class="menu-header">' + res[0].ErrorMessage + '</h1>');
+            }
+        }
+        xmlHttp.send(null);
+
+
+
+    </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</body>
+
+</html>

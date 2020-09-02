@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Text Forensics -  Term Frequency Comparative Analysis Over a Month</title>
+    <link rel="stylesheet" href="assets/css/stylesheet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <script>
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var year = url.searchParams.get("year");
+        var term1 = url.searchParams.get("word1");
+        var term2 = url.searchParams.get("word2");
+        var term3 = url.searchParams.get("word3");
+        var terms = "['"+term1+"', '"+term2+"', '"+term3+"']";
+        var month = url.searchParams.get("month");
+        var data = 'http://127.0.0.1:5000/ThreeTermFrequencyComparativeAnalysisOverSingleMonth?year=' + year + '&month=' + month + '&threeWordsList=' + terms;
+
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", data, false);
+        xmlHttp.onload = function () {
+            var res = JSON.parse(xmlHttp.responseText);
+            if (res[0].ErrorMessage == 'None') {
+                document.write("<h1 class='menu-header'>Three Term Frequency Comparative Analysis Over " + res[0].MonthInput +" "+ res[0].YearInput+"</h1>\n<div id=mydiv></div>")
+                var data = [
+                    {
+                        x: res[0].DaysInMonthXAxis,
+                        y: res[0].FrequencyOFWord1YAxis,
+                        mode: 'lines+markers',
+                        name: res[0].WordsInput[0],
+                        type: 'scatter'
+                    },
+                    {
+                        x: res[0].DaysInMonthXAxis,
+                        y: res[0].FrequencyOFWord2YAxis,
+                        mode: 'lines+markers',
+                        name: res[0].WordsInput[1],
+                        type: 'scatter'
+                    },
+                    {
+                        x: res[0].DaysInMonthXAxis,
+                        y: res[0].FrequencyOFWord3YAxis,
+                        mode: 'lines+markers',
+                        name: res[0].WordsInput[2],
+                        type: 'scatter'
+                    }
+                ];
+                var layout = {
+                    autosize: true,
+                    xaxis: {
+                        title: 'Days',
+                        autorange: true,
+                        showgrid: true,
+                        zeroline: true,
+                        showline: true,
+                        automargin: true,
+                        fixedrange: true,
+                        showticklabels: true,
+                    },
+                    yaxis: {
+                        title: 'Frequency',
+                        autorange: true,
+                        showgrid: true,
+                        showline: false,
+                        automargin: true,
+                        fixedrange: true,
+                        showticklabels: true,
+                    }
+                };
+                Plotly.newPlot('mydiv', data, layout);
+            } else {
+                document.write('<h1 class="menu-header">' + res[0].ErrorMessage + '</h1>');
+            }
+        }
+        xmlHttp.send(null);
+
+
+
+    </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</body>
+
+</html>
