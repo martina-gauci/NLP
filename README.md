@@ -16,7 +16,7 @@ This approach improves accuracy and reliability of the classifications while als
 You will need to install the following Python packages to run the code in this repository: NLTK, MatPlotLib, Plotly, Numpy, SkLearn, Tweepy, SciPy, PsycoPg2, TTKThemes, Flask and Flask-Restful.
 
 To set up the Text Forensics tool follow the steps below:
-1. Create and import database from the backup provided
+1. Create and import database from the backup which can be found here: https://drive.google.com/file/d/1ApHfyimNzFEfVSXDeT2NcT1far999jfA/view?usp=sharing
 
 2. Open the API.py file provided, and at the top change the database connection string to contain your own database password.
 
